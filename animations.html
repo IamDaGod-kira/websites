@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+   <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width: device-width; initial-scale: 1;">
+     <title>CSS Animations</title>
+   </head>
+   <link rel="stylesheet" href="https://pritam2958.github.io/cdn/fontster.css">
+   <body>
+     <h1>Animations</h1>
+     <div id="animation1">
+       <h3>RGB Text</h3>
+     </div>
+     <div id="animation2">
+       <h3>RGB Text Shadow </h3>
+     </div>
+     <div id="animation4">
+       <h3>Typing Animation</h3>
+     </div>
+     <div id="animation5">
+       <h3>Invisible - Visible Text</h3>
+     </div>
+   </body>
+   <style>
+     @keyframes rgb {
+       10% {color: black;}
+       20% {color: blue;}
+       30% {color: green;}
+       40% {color: yellow;}
+       50% {color: red;}
+       60% {color: orange;}
+       70% {color: gold;}
+       80% {color: cyan;}
+       90% {color: purple;}
+       100% {color: #2fa;}
+     }
+     @keyframes shadow {
+       10% {text-shadow: 5px 5px 4px black;}
+       20% {text-shadow: 5px 5px 4px blue;}
+       30% {text-shadow: 5px 5px 4px green;}
+       40% {text-shadow: 5px 5px 4px yellow;}
+       50% {text-shadow: 5px 5px 4px red;}
+       60% {text-shadow: 5px 5px 4px orange;}
+       70% {text-shadow: 5px 5px 4px gold;}
+       80% {text-shadow: 5px 5px 4px cyan;}
+       90% {text-shadow: 5px 5px 4px purple;}
+       100% {text-shadow: 5px 5px 4px #2fa}
+     }
+     body {
+       text-align: center;
+       background-color: rgb(47, 79, 79);
+       color: #ffffff;
+       font-family: 'League Gothic';
+       letter-spacing: 2px;
+       font-size: 20px;
+     }
+     #animation1 {
+       animation: rgb 15s infinite;
+     }
+     #animation2 {
+       animation: shadow 10s infinite;
+     }
+     img {
+       height: 100px;
+     }
+     #animation4 {
+       overflow: hidden;
+       border-right: .15em solid orange;
+       white-space: nowrap;
+       margin: 0 auto;
+       animation:
+       typing 4.5s steps(40, end),
+       blink-caret .75s step-end infinite;
+       color: orange;
+       width: 130px;
+       width: 100%;
+     }
+     @keyframes typing {
+     from { width: 0 }
+     to { width: 40% }
+     }
+     @keyframes blink-caret {
+     from, to { border-color: transparent}
+     50% { border-color: rgb(0, 0, 0); }
+     }
+     #animation5 {
+       animation: vision 5s infinite;
+     }
+     @keyframes vision {
+       from, to {opacity: 0;}
+       50% {opacity: 1;}
+     }
+   </style>
+</html>
