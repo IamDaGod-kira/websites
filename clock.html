@@ -1,280 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script charset="utf-8">
-    window.onload = () => {
-  let hour = document.getElementById("hour")
-  let min = document.getElementById("min")
-  let day = document.getElementById("day")
-  let date = document.getElementById("date")
-  let indicator = document.getElementById("indicator")
-  let power = document.getElementById("power")
-  const getDay = () => {
-    let curDate = new Date()
-    let din = curDate.getDay();
-    switch (din) {
-      case 0: din = "Sunday"; break;
-      case 1: din = "Monday"; break;
-      case 2: din = "Tuesday"; break;
-      case 3: din = "Wednesday"; break;
-      case 4: din = "Thursday"; break;
-      case 5: din = "Friday"; break;
-      case 6: din = "Saturday"; break;
-    }
-    day.textContent = din
-  }
-  const start = () => {
-    let today = new Date()
-    let hh = today.getHours();
-    let mm = today.getMinutes();
-    let dt = today.getDate();
-    let mn = today.getMonth()+1;
-    let yr = today.getFullYear();
-    if (hh > 12) hh = hh-12;
-    hh = hh >= 10?hh: "0"+hh;
-    mm = mm >= 10?mm: "0"+mm;
-    mn = mn >= 10?mn: "0"+mn;
-    dt = dt >= 10?dt: "0"+dt;
-    hour.innerHTML = hh
-    min.innerHTML = mm
-    date.innerHTML = dt+":"+mn+":"+yr
-    setInterval(start,1000)
-  }
-  const battery = () => {
-    navigator.getBattery().then((battery)=> {
-      let bt = battery.level*100;
-      bt = Math.ceil(bt)
-      let st = battery.charging
-      power.textContent = "BATTERY LEVEL : " + bt + "%"
-      indicator.style.width = bt +"%"
-      if(st){
-        indicator.classList.add("battery")
-      }
-      else {
-        indicator.classList.remove("battery")
-      }
-  });
-  setTimeout(battery,2000);
-}
-start();getDay();battery();
-} //window
-
-  </script>
-  <title>Clock</title>
-</head>
+<html>
+  <head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width: device-width, initial-scale: 1">
+    <title>Analogue Clock</title>
+  </head>
+  <link rel="stylesheet" href="https://pritam2958.github.io/cdn/fontster.css">
 <body>
-  <div class="main">
-    <div class="hanger"></div>
-    <div class="light"></div>
-    <div class="light-e"></div>
-    <div class="time">
-      <div id="hour">02</div>
-      <div id="min">56</div>
+  <div class="container">
+    <div class="clock">
+      <div id="sc" class="circle" style="--clr: #04fc43"><i></i></div>
+      <div id="mn" class="circle circle2" style="--clr: #fee800"><i></i></div>
+      <div id="hr" class="circle circle3" style="--clr: #ff2972"><i></i></div>
+      
+      <span style="--i:1;"><b>1</b></span>
+      <span style="--i:2;"><b>2</b></span>
+      <span style="--i:3;"><b>3</b></span>
+      <span style="--i:4;"><b>4</b></span>
+      <span style="--i:5;"><b>5</b></span>
+      <span style="--i:6;"><b>6</b></span>
+      <span style="--i:7;"><b>7</b></span>
+      <span style="--i:8;"><b>8</b></span>
+      <span style="--i:9;"><b>9</b></span>
+      <span style="--i:10;"><b>10</b></span>
+      <span style="--i:11;"><b>11</b></span>
+      <span style="--i:12;"><b>12</b></span>
     </div>
-    <div class="upper-base"></div>
-    <div class="base-shadow"></div>
-    <div class="base">
-      <div class="dd">
-      <p id="date">12:05:2022</p>
-      <p id="day">Thursday</p>
-      </div>
-      <div id="battery">
-        <div id="indicator"></div>
-      </div>
-      <p class="power" id="power"></p>
-    </div>
+    <p id="display" style="color: #04fc43;  font-weight: 700"></p>
   </div>
 </body>
-</html>
-<style> 
-  * {
-  padding: 0;
+<style>
+* {
   margin: 0;
-  box-sizing: box-sizing;
-  outline: none;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-  background: linear-gradient(#fff,#000);
-  overflow:hidden;
-  height:100vh;
-  width:100vw;
-}
-.main {
-  background: #344549;
-  padding: 10rem 1.3rem;
-  transform: translate(-50% ,-50%);
-  top: 50%;
-  left: 50%;
-  display: flex;
-  position: absolute;
-  overflow: hidden;
-  border-radius: 10px;
-  min-width:250px;
-  max-width:280px;
-}
-.base {
-  background: #4B535E;
-  padding: .8rem 1.3rem;
-  display: flex;
-  gap: 3rem;
-  border-radius: 6px;
-  left:50%;
-  transform: translate(-50% , 120%);
-  box-shadow: inset 0px 4px 4px #D1DEED;
-  position:relative ;
-}
-#day,#date {
-  display: flex;
-  flex-direction: row;
-  padding: .15rem 0;
-  color: white;
-}
-#day{
-  font-weight: bold;
-}
-#date{
-  font-weight: 500;
-}
-#battery {
-  height: 2.5rem;
-  width: 7.5rem;
-  background: #2D3337;
-  border-radius: 10px;
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.upper-base {
-  height: 0;
-  padding: 1.6rem 6.6rem ;
-  border-bottom: 2rem solid #C5D3E2;
-  border-left: 2rem solid transparent;
-  border-right: 2rem solid transparent;
-  position: absolute;
-  border-radius: 6px;
-  left: 50%;
-  transform: translate(-50%);
-}
-.base-shadow{
-  height: 0;
-  padding: 4.3rem 7.6rem ;
-  border-bottom: 5rem solid #2D3337;
-  border-left: 2.998rem solid transparent;
-  border-right: 2.998rem solid transparent;
-  position: absolute;
-  border-radius: 6px;
-  filter: blur(8px);
-  left: 50%;
-  transform: translate(-50%);
-}
-.light{
-  position: absolute;
-  height: 2.5rem;
-  width: 5.5rem;
-  background: radial-gradient(#1B3338,#508188);
-  border-radius: 100px 100px 0 0;
-  top: .3rem;
-  left: 50%;
-  transform: translate(-50%);
-}
-.light::before{
-  content: "";
-  height: .8rem;
-  width: 6.5rem;
-  background: white;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%);
-  border-radius: 100px;
-  box-shadow: inset 0 -5px 4px silver;
-}
-.light::after{
-  content: "";
-  height: 1.8rem;
-  width: 4rem;
-  background: #EBF0F5;
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translate(-50%, 100%);
-  border-radius: 0 0 100px 100px;
-  box-shadow: inset 0 6px 10px silver;
-}
-.light-e{
-  height: 0;
-  padding: 1.17rem 2rem ;
-  border-bottom: 17rem solid #EAF0F4;
-  border-left: 7rem solid transparent;
-  border-right: 7rem solid transparent;
-  position: absolute;
-  border-radius: 6px;
-  filter: blur(30px);
-  top: .3rem;
-  left: 50%;
-  transform: translate(-50%);
-}
-#hour,#min{
-  color: black;
-  background: linear-gradient(#FFFFFF,#A6B1B2);
-  font-size: 2.8rem;
-  display: flex;
-  padding: .4rem .4rem;
-  box-shadow:inset 4px 4px 5px silver;
-}
-.time{
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%);
-  color: black;
-  background: transparent;
-  padding: .5rem 1.2rem;
-  font-size: 2rem;
+  font-family: 'Poppins';
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: .5rem;
-  z-index: 2;
+  min-height: 100vh;
+  background-color: #2f363e;
 }
-#indicator{
-  background: linear-gradient(to right,#C5D3E2, #15BE95);
+.container {
+  position: relative;
+  background: #2f363e;
+  border-radius: 20px;
+  /*border-top-left-radius: 225px;
+  border-top-right-radius: 225px;*/
+ /* min-height: 500px; */
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.75);
+              10px 10px 70px rgba(0, 0, 0, 0.25)
+  inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+  inset 5px 5px 20px rgba(0, 0, 0, 0.2);
+  inset -5px -5px 15px rgb(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clock {
+  border: 2px solid cyan;
+  text-shadow: 3px 3px 5px cyan,
+               3px 3px 5px cyan;
+  position: relative;
+  width: 450px;
+  height: 450px;
+  background: #2f363e;
+  border-radius: 50%;
+  box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25);
+  inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+  inset 5px 5px 20px rgba(0, 0, 0, 0.2);
+  inset -5px -5px 15px rgb(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.clock::before {
+  content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  color:white;
+  width: 8px;
+  height: 8px;
+  background: #2f363e;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 100000;
 }
-.battery{
-  animation: ind 2s infinite linear;
-}
-@keyframes ind{
-  from{
-    width: 0%;
-  }
-  to{
-    width: 100%;
-  }
-}
-.power{
-    color:white;
-    position:absolute ;
-    z-index:222;
-    right:2rem;
-    bottom:.1rem;
-    font-size:.7rem;
-    text-align:center ;
-}
-.hanger{
+.clock span {
   position: absolute;
-  height: .3rem;
-  width: .45rem;
-  background: #508188;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%);
-  z-index:22222;
+  inset: 20px;
+  color: #fff;
+  text-align: center;
+  transform: rotate(calc(30deg * var(--i)));
+}
+.clock span b {
+  font-size: 2em;
+  opacity: 1;
+  font-weight: 600;
+  display: inline-block;
+  transform: rotate(calc(-30deg * var(--i)));
+}
+.circle {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 10;
+}
+.circle2 {
+  width: 240px;
+  height: 240px;
+  z-index: 9;
+}
+.circle3 {
+  width: 180px;
+  height: 180px;
+  z-index: 8;
+}
+.circle i {
+  position: absolute;
+  width: 6px;
+  height: 50%;
+  background: var(--clr);
+  opacity: 0.5;
+  transform-origin: bottom;
+  transform: scaleY(0.5);
+}
+circle:nth-child(1) i {
+  width: 2px;
+}
+circle:nth-child(2) i {
+  width: 6px;
+}
+circle:nth-child(3) i {
+  width: 2px;
+}
+.circle:before {
+  content: '';
+  position: absolute;
+  top: -8.5px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--clr);
+  box-shadow: 0px 0px 20px var(--clr),
+              0px 0px 60px var(--clr);
+}
+#display {
+  box-shadow: 0px 0px 20px #04fc43,
+              0px 0px 60px #04fc43;
 }
 </style>
+<script>
+  let hr = document.querySelector('#hr');
+  let mn = document.querySelector('#mn');
+  let sc = document.querySelector('#sc');
+  let display = document.querySelector("#display");
+  
+  setInterval(() => {
+  let day = new Date();
+  let hh = day.getHours() * 30;
+  let mm = day.getMinutes() * 6;
+  let ss = day.getSeconds() * 6;
+  
+  hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+  mn.style.transform = `rotateZ(${mm}deg)`;
+  sc.style.transform = `rotateZ(${ss}deg)`;
+  display.innerHTML = `${day}`;
+  })
+</script>
+</html>
