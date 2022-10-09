@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Session Storage</title>
+    <meta name="viewport" content="width= divice-width, initial-scale= 1;">
+    <link rel="stylesheet" href="https://pritam2958.github.io/assets/docs/fontster.css" title="" type="" />
+  </head>
+  <body>
+    <h3 align="center">Save Contacts</h3>
+    <div id="main">
+    <label for="name">Name </label><input type="text" id="name"><br />
+    <label for="number ">Number </label><input type="number" id="number"><br />
+    <button type="submit" onclick="setData()">Save Data</button>
+    <hr color="grey">
+    <label for="clearData">Enter Name to Delete</label>
+    <input type="text" list="clearList" id="clearData">
+    <br />
+    <button onclick="clearData()">Clear this Item</button>
+    <hr color="grey">
+    <label for="getName">Enter Name </label><input list="getNameList" name="getName" type="text" id="getName">
+    <br>
+    <button onclick="getData()">Get Data</button>
+    <hr color="grey">
+    <button onclick="clearAll()">Clear All Data</button>
+    </div>
+  </body>
+</html>
+<style>
+  body {
+    background: #2fa;
+    font-family: 'Rubik Burned';
+  }
+  #main {
+    position: absolute;
+    font-family: 'Concert One';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    caret-color: crimson;
+    background-color: #2fa;
+    border: 10px double gold;
+    border-radius: 30px;
+  }
+  button {
+    border: 3px solid crimson;
+    border-radius: 30px;
+    background: #2da;
+    color: navy;
+  }
+</style>
+<script>
+  const sessionStorage = window.sessionStorage;
+  const name = document.querySelector("#name");
+  const number = document.querySelector("#number");
+  const getName = document.querySelector("#getName");
+  const cleardata = document.querySelector("#clearData");
+  
+  function setData() {
+    sessionStorage.setItem(name.value, number.value);
+  }
+  function getData() {
+    alert(sessionStorage.getItem(getName.value));
+  }
+  function clearData() {
+    sessionStorage.removeItem(cleardata.value);
+  }
+  function clearAll() {
+    sessionStorage.clear();
+  }
+  
+  alert("Welcome ! \n\n This is a contacts storage website where you can save contacts \n \n but remrmber, when you close or refresh this website or close your browser, all data gets erased.")
+</script>
+<!--Code Complete-->
