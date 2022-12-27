@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width: device-width, initial-scale: 1">
+    <title>Analogue Clock</title>
+  </head>
+  <link rel="stylesheet" href="https://pritam2958.github.io/cdn/fontster.css">
+<body>
+  <div class="container">
+    <div class="clock">
+      <div id="sc" class="circle" style="--clr: #04fc43"><i></i></div>
+      <div id="mn" class="circle circle2" style="--clr: #fee800"><i></i></div>
+      <div id="hr" class="circle circle3" style="--clr: #ff2972"><i></i></div>
+      
+      <span style="--i:1;"><b>1</b></span>
+      <span style="--i:2;"><b>2</b></span>
+      <span style="--i:3;"><b>3</b></span>
+      <span style="--i:4;"><b>4</b></span>
+      <span style="--i:5;"><b>5</b></span>
+      <span style="--i:6;"><b>6</b></span>
+      <span style="--i:7;"><b>7</b></span>
+      <span style="--i:8;"><b>8</b></span>
+      <span style="--i:9;"><b>9</b></span>
+      <span style="--i:10;"><b>10</b></span>
+      <span style="--i:11;"><b>11</b></span>
+      <span style="--i:12;"><b>12</b></span>
+    </div>
+    <p id="display" style="color: #04fc43;  font-weight: 700"></p>
+  </div>
+</body>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins';
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #2f363e;
+}
+.container {
+  position: relative;
+  background: #2f363e;
+  border-radius: 20px;
+  /*border-top-left-radius: 225px;
+  border-top-right-radius: 225px;*/
+ /* min-height: 500px; */
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.75);
+              10px 10px 70px rgba(0, 0, 0, 0.25)
+  inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+  inset 5px 5px 20px rgba(0, 0, 0, 0.2);
+  inset -5px -5px 15px rgb(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clock {
+  border: 2px solid cyan;
+  text-shadow: 3px 3px 5px cyan,
+               3px 3px 5px cyan;
+  position: relative;
+  width: 450px;
+  height: 450px;
+  background: #2f363e;
+  border-radius: 50%;
+  box-shadow: 10px 50px 70px rgba(0, 0, 0, 0.25);
+  inset 5px 5px 10px rgba(0, 0, 0, 0.5);
+  inset 5px 5px 20px rgba(0, 0, 0, 0.2);
+  inset -5px -5px 15px rgb(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.clock::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #2f363e;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  z-index: 100000;
+}
+.clock span {
+  position: absolute;
+  inset: 20px;
+  color: #fff;
+  text-align: center;
+  transform: rotate(calc(30deg * var(--i)));
+}
+.clock span b {
+  font-size: 2em;
+  opacity: 1;
+  font-weight: 600;
+  display: inline-block;
+  transform: rotate(calc(-30deg * var(--i)));
+}
+.circle {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 10;
+}
+.circle2 {
+  width: 240px;
+  height: 240px;
+  z-index: 9;
+}
+.circle3 {
+  width: 180px;
+  height: 180px;
+  z-index: 8;
+}
+.circle i {
+  position: absolute;
+  width: 6px;
+  height: 50%;
+  background: var(--clr);
+  opacity: 0.5;
+  transform-origin: bottom;
+  transform: scaleY(0.5);
+}
+circle:nth-child(1) i {
+  width: 2px;
+}
+circle:nth-child(2) i {
+  width: 6px;
+}
+circle:nth-child(3) i {
+  width: 2px;
+}
+.circle:before {
+  content: '';
+  position: absolute;
+  top: -8.5px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--clr);
+  box-shadow: 0px 0px 20px var(--clr),
+              0px 0px 60px var(--clr);
+}
+#display {
+  box-shadow: 0px 0px 20px #04fc43,
+              0px 0px 60px #04fc43;
+}
+</style>
+<script>
+  let hr = document.querySelector('#hr');
+  let mn = document.querySelector('#mn');
+  let sc = document.querySelector('#sc');
+  let display = document.querySelector("#display");
+  
+  setInterval(() => {
+  let day = new Date();
+  let hh = day.getHours() * 30;
+  let mm = day.getMinutes() * 6;
+  let ss = day.getSeconds() * 6;
+  
+  hr.style.transform = `rotateZ(${hh + (mm / 12)}deg)`;
+  mn.style.transform = `rotateZ(${mm}deg)`;
+  sc.style.transform = `rotateZ(${ss}deg)`;
+  display.innerHTML = `${day}`;
+  })
+</script>
+</html>
